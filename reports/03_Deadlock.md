@@ -97,7 +97,24 @@ Threads:   3 total,   0 running,   3 sleeping,   0 stopped,   0 zombie
 - `TIME+`(누적 CPU 시간)가 10초 전과 동일 → 연산하지 않음 (무한루프가 아님)
 - 마지막 로그도 10/21과 같은 `WAITING for [Socket_Pool_B]` / `WAITING for [Shared_Memory_A]` 두 줄
 
-**진단 흐름**
+### 2-4. monitor.sh 관제 로그 — CPU/MEM 변화 정체 (10/23 자동 재현)
+
+([logs/deadlock_before/monitor.log](../logs/deadlock_before/monitor.log))
+
+```
+[2026-10-23 17:21:06] PROCESS:agent-leak-app- PID:11060 STATE:S CPU:0.0% MEM:0.1% RSS:20MB THREADS:4 PROCS:2 DISK:955G FIREWALL:unknown   <- 마지막 BLOCKED 로그 시각
+[2026-10-23 17:21:11] PROCESS:agent-leak-app- PID:11060 STATE:S CPU:0.0% MEM:0.1% RSS:20MB THREADS:4 PROCS:2 DISK:955G FIREWALL:unknown
+...
+[2026-10-23 17:21:42] PROCESS:agent-leak-app- PID:11060 STATE:S CPU:0.0% MEM:0.1% RSS:20MB THREADS:4 PROCS:2 DISK:955G FIREWALL:unknown
+[2026-10-23 17:21:51] PROCESS:agent-leak-app- PID:11060 STATE:S CPU:0.0% MEM:0.1% RSS:20MB THREADS:4 PROCS:2 DISK:955G FIREWALL:unknown
+[2026-10-23 17:21:53] PROCESS:11060 STATUS:GONE   <- 관찰 종료 후 스크립트가 직접 종료
+```
+
+- 마지막 로그(17:21:06) 이후 약 45초 동안 2초 간격 측정 내내 CPU 0.0%, RSS 20MB 고정
+- 프로세스(PID 11060)는 계속 존재 → 죽지 않았지만 아무 일도 하지 않는 무응답 상태
+- OOM(RSS 증가)이나 CPU 과점유(CPU 상승)와 달리 **수치 자체가 움직이지 않는 것**이 데드락의 관제 패턴
+
+### 2-5. 진단 흐름 정리
 
 1. `ps -ef`로 PID 존재 확인 → 종료된 것이 아님
 2. `ps -L`로 스레드 상태 확인 → `R`(실행 중)이 아니라 모두 `S`(대기), CPU 0% → 무한루프가 아님
@@ -132,6 +149,8 @@ Worker-Thread-1 --(Socket_Pool_B 대기)--> Worker-Thread-2
 | 순환 대기 (Circular Wait) | Thread-1 → B(Thread-2 보유), Thread-2 → A(Thread-1 보유) |
 
 네 조건이 동시에 성립하므로 **교착상태(Deadlock)**다. 락을 해제하는 코드는 작업을 마친 뒤에 실행되므로, 어느 스레드도 먼저 락을 놓지 못하고 영원히 대기한다.
+
+식사하는 철학자 문제로 보면, 두 철학자(스레드)가 각자 왼쪽 포크(첫 번째 락)를 든 채 오른쪽 포크(상대가 든 락)를 기다려 아무도 식사를 시작하지 못하는 상황과 같다.
 
 **OOM·CPU 장애와의 차이**
 
