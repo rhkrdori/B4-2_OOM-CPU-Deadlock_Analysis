@@ -1,0 +1,104 @@
+### ps -ef | grep agent
+rhkrdori   11038     615  0 17:20 pts/0    00:00:00 bash /home/rhkrdori/agent-mission/agent-mission/run_case.sh deadlock_before MULTI_THREAD_ENABLE=true MEMORY_LIMIT=512 CPU_MAX_OCCUPY=50
+rhkrdori   11060   11038  0 17:20 pts/0    00:00:00 /home/rhkrdori/agent-mission/agent-mission/agent-leak-app-x86
+rhkrdori   11062   11060  0 17:20 pts/0    00:00:00 /home/rhkrdori/agent-mission/agent-mission/agent-leak-app-x86
+rhkrdori   11063   11038  0 17:20 pts/0    00:00:00 bash /home/rhkrdori/agent-mission/agent-mission/monitor.sh 11060 2 /home/rhkrdori/agent-mission/agent-mission/runs/deadlock_before/monitor.log
+
+### [1/3] 2026-10-23 17:21:36  ps -L (스레드별 상태)
+    PID     LWP STAT %CPU %MEM   RSS WCHAN                    COMMAND
+  11062   11062 SNl+  0.1  0.1 18472 futex_do_wait            agent-leak-app-
+  11062   11270 SNl+  0.0  0.1 18472 futex_do_wait            agent-leak-app-
+  11062   11271 SNl+  0.0  0.1 18472 futex_do_wait            agent-leak-app-
+
+### [1/3] 2026-10-23 17:21:36  top -H
+top - 17:21:36 up 7 min,  1 user,  load average: 0.07, 0.10, 0.04
+Threads:   3 total,   0 running,   3 sleeping,   0 stopped,   0 zombie
+%Cpu(s):  0.0 us,  0.0 sy,  0.0 ni,100.0 id,  0.0 wa,  0.0 hi,  0.0 si,  0.0 st 
+MiB Mem :  15633.7 total,  14572.2 free,    647.8 used,    624.4 buff/cache     
+MiB Swap:   4096.0 total,   4096.0 free,      0.0 used.  14985.9 avail Mem 
+
+    PID USER      PR  NI    VIRT    RES    SHR S  %CPU  %MEM     TIME+ COMMAND
+  11062 rhkrdori  30  10  170868  18472  10224 S   0.0   0.1   0:00.07 agent-l+
+  11270 rhkrdori  30  10  170868  18472  10224 S   0.0   0.1   0:00.00 agent-l+
+  11271 rhkrdori  30  10  170868  18472  10224 S   0.0   0.1   0:00.00 agent-l+
+
+### [2/3] 2026-10-23 17:21:41  ps -L (스레드별 상태)
+    PID     LWP STAT %CPU %MEM   RSS WCHAN                    COMMAND
+  11062   11062 SNl+  0.1  0.1 18472 futex_do_wait            agent-leak-app-
+  11062   11270 SNl+  0.0  0.1 18472 futex_do_wait            agent-leak-app-
+  11062   11271 SNl+  0.0  0.1 18472 futex_do_wait            agent-leak-app-
+
+### [2/3] 2026-10-23 17:21:41  top -H
+top - 17:21:41 up 7 min,  1 user,  load average: 0.07, 0.10, 0.04
+Threads:   3 total,   0 running,   3 sleeping,   0 stopped,   0 zombie
+%Cpu(s):  0.0 us,  0.0 sy,  0.0 ni,100.0 id,  0.0 wa,  0.0 hi,  0.0 si,  0.0 st 
+MiB Mem :  15633.7 total,  14575.6 free,    644.3 used,    624.4 buff/cache     
+MiB Swap:   4096.0 total,   4096.0 free,      0.0 used.  14989.3 avail Mem 
+
+    PID USER      PR  NI    VIRT    RES    SHR S  %CPU  %MEM     TIME+ COMMAND
+  11062 rhkrdori  30  10  170868  18472  10224 S   0.0   0.1   0:00.07 agent-l+
+  11270 rhkrdori  30  10  170868  18472  10224 S   0.0   0.1   0:00.00 agent-l+
+  11271 rhkrdori  30  10  170868  18472  10224 S   0.0   0.1   0:00.00 agent-l+
+
+### [3/3] 2026-10-23 17:21:46  ps -L (스레드별 상태)
+    PID     LWP STAT %CPU %MEM   RSS WCHAN                    COMMAND
+  11062   11062 SNl+  0.1  0.1 18472 futex_do_wait            agent-leak-app-
+  11062   11270 SNl+  0.0  0.1 18472 futex_do_wait            agent-leak-app-
+  11062   11271 SNl+  0.0  0.1 18472 futex_do_wait            agent-leak-app-
+
+### [3/3] 2026-10-23 17:21:46  top -H
+top - 17:21:46 up 7 min,  1 user,  load average: 0.06, 0.10, 0.04
+Threads:   3 total,   0 running,   3 sleeping,   0 stopped,   0 zombie
+%Cpu(s):  0.0 us,  0.0 sy,  0.0 ni,100.0 id,  0.0 wa,  0.0 hi,  0.0 si,  0.0 st 
+MiB Mem :  15633.7 total,  14571.5 free,    648.4 used,    624.4 buff/cache     
+MiB Swap:   4096.0 total,   4096.0 free,      0.0 used.  14985.2 avail Mem 
+
+    PID USER      PR  NI    VIRT    RES    SHR S  %CPU  %MEM     TIME+ COMMAND
+  11062 rhkrdori  30  10  170868  18472  10224 S   0.0   0.1   0:00.07 agent-l+
+  11270 rhkrdori  30  10  170868  18472  10224 S   0.0   0.1   0:00.00 agent-l+
+  11271 rhkrdori  30  10  170868  18472  10224 S   0.0   0.1   0:00.00 agent-l+
+
+### /proc/11062/status
+Name:	agent-leak-app-
+State:	S (sleeping)
+VmRSS:	   18472 kB
+Threads:	3
+voluntary_ctxt_switches:	28
+nonvoluntary_ctxt_switches:	1
+
+### 스레드별 커널 대기 지점 (wchan: futex_* 이면 락 대기)
+11062  state=S (sleeping)  wchan=futex_do_wait
+11270  state=S (sleeping)  wchan=futex_do_wait
+11271  state=S (sleeping)  wchan=futex_do_wait
+
+### 로그 마지막 30줄
+   ... MEMORY_LIMIT=512MB, CPU_MAX_OCCUPY=50%, MULTI_THREAD_ENABLE=True
+------------------------------------------------------------
+All Boot Checks Passed!
+Agent READY
+2026-10-23 17:20:57,424 [INFO] [SafetyGuard] Process priority lowered (nice=10).
+2026-10-23 17:20:57,424 [INFO] Agent listening at port 15034
+
+==================================================
+ [ Agent Initiate ] Resource Check 
+==================================================
+ [ MEMORY ] Limit: 512MB 		[ OK ]
+ [ CPU    ] Limit: 50%  		[ OK ]
+ [ THREAD ] Concurrency: True 		[ WARNING ]
+--------------------------------------------------
+ >>> SYSTEM WARNING: POTENTIAL DEADLOCK IN CONCURRENT MODE.
+==================================================
+
+2026-10-23 17:20:59,435 [WARNING] [AgentWorker] Initializing concurrent transaction processors...
+2026-10-23 17:20:59,435 [WARNING] [System] CAUTION: Strict resource locking is enabled.
+2026-10-23 17:21:04,461 [INFO] [Worker-Thread-1] Process Started. Attempting to lock [Shared_Memory_A]...
+2026-10-23 17:21:04,462 [INFO] [AgentWorker][Worker-Thread-2] Process Started. Attempting to lock [Socket_Pool_B]...
+2026-10-23 17:21:04,462 [INFO] [AgentWorker][Worker-Thread-1] LOCK ACQUIRED: [Shared_Memory_A]. (Holding...)
+2026-10-23 17:21:04,463 [INFO] [AgentWorker][Worker-Thread-2] LOCK ACQUIRED: [Socket_Pool_B]. (Holding...)
+2026-10-23 17:21:04,463 [INFO] [AgentWorker][Worker-Thread-1] Processing critical data in Memory A...
+2026-10-23 17:21:04,463 [INFO] [AgentWorker][Worker-Thread-2] Establishing network connections in Pool B...
+2026-10-23 17:21:04,464 [INFO] [AgentWorker] Waiting for worker threads to complete transactions...
+2026-10-23 17:21:06,474 [INFO] [AgentWorker][Worker-Thread-1] Need resource [Socket_Pool_B] to finish job.
+2026-10-23 17:21:06,474 [INFO] [AgentWorker][Worker-Thread-2] Need resource [Shared_Memory_A] to write logs.
+2026-10-23 17:21:06,475 [INFO] [AgentWorker][Worker-Thread-1] WAITING for [Socket_Pool_B]... (Status: BLOCKED)
+2026-10-23 17:21:06,475 [INFO] [AgentWorker][Worker-Thread-2] WAITING for [Shared_Memory_A]... (Status: BLOCKED)

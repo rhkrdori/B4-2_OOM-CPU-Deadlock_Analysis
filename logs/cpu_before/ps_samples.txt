@@ -1,0 +1,24 @@
+===== 2026-10-23 17:17:57 (+1s)
+    PID    PPID STAT %CPU %MEM   RSS NLWP     ELAPSED CMD
+   5524    5502 S+    7.8  0.0  2312    1       00:01 /home/rhkrdori/agent-mission/agent-mission/agent-leak-app-x86
+   5526    5524 SN+   7.0  0.1 18304    1       00:01 /home/rhkrdori/agent-mission/agent-mission/agent-leak-app-x86
+===== 2026-10-23 17:18:06 (+11s)
+    PID    PPID STAT %CPU %MEM   RSS NLWP     ELAPSED CMD
+   5524    5502 S+    0.9  0.0  2312    1       00:11 /home/rhkrdori/agent-mission/agent-mission/agent-leak-app-x86
+   5526    5524 SN+   1.1  0.1 18368    1       00:10 /home/rhkrdori/agent-mission/agent-mission/agent-leak-app-x86
+===== 2026-10-23 17:18:16 (+21s)
+    PID    PPID STAT %CPU %MEM   RSS NLWP     ELAPSED CMD
+   5524    5502 S+    0.4  0.0  2312    1       00:20 /home/rhkrdori/agent-mission/agent-mission/agent-leak-app-x86
+   5526    5524 SN+   0.8  0.1 18368    1       00:20 /home/rhkrdori/agent-mission/agent-mission/agent-leak-app-x86
+===== 2026-10-23 17:18:26 (+31s)
+    PID    PPID STAT %CPU %MEM   RSS NLWP     ELAPSED CMD
+   5524    5502 S+    0.3  0.0  2312    1       00:30 /home/rhkrdori/agent-mission/agent-mission/agent-leak-app-x86
+   5526    5524 SN+   0.9  0.1 18368    1       00:30 /home/rhkrdori/agent-mission/agent-mission/agent-leak-app-x86
+===== 2026-10-23 17:18:37 (+41s)
+    PID    PPID STAT %CPU %MEM   RSS NLWP     ELAPSED CMD
+   5524    5502 S+    0.2  0.0  2312    1       00:41 /home/rhkrdori/agent-mission/agent-mission/agent-leak-app-x86
+   5526    5524 SN+   1.0  0.1 18368    1       00:41 /home/rhkrdori/agent-mission/agent-mission/agent-leak-app-x86
+===== 2026-10-23 17:18:46 (+51s)
+    PID    PPID STAT %CPU %MEM   RSS NLWP     ELAPSED CMD
+   5524    5502 S+    0.1  0.0  2312    1       00:51 /home/rhkrdori/agent-mission/agent-mission/agent-leak-app-x86
+   5526    5524 SN+   1.0  0.1 18368    1       00:50 /home/rhkrdori/agent-mission/agent-mission/agent-leak-app-x86

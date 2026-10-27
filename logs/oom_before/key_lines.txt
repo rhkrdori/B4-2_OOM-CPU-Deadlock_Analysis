@@ -1,0 +1,4 @@
+/home/rhkrdori/agent-mission/agent-mission/runs/oom_before/app.log:41:2026-10-23 17:15:47,579 [CRITICAL] [MemoryGuard] Memory limit exceeded (275MB >= 256MB) / (Recommend Over 256MB)
+/home/rhkrdori/agent-mission/agent-mission/runs/oom_before/app.log:42:2026-10-23 17:15:47,579 [CRITICAL] [MemoryGuard] Self-terminating process 642 to prevent system instability.
+/home/rhkrdori/agent-mission/agent-mission/runs/oom_before/applog/agent_app.log:14:2026-10-23 17:15:47,579 [CRITICAL] [MemoryGuard] Memory limit exceeded (275MB >= 256MB) / (Recommend Over 256MB)
+/home/rhkrdori/agent-mission/agent-mission/runs/oom_before/applog/agent_app.log:15:2026-10-23 17:15:47,579 [CRITICAL] [MemoryGuard] Self-terminating process 642 to prevent system instability.

@@ -1,0 +1,10 @@
+# 제공 바이너리 / 압축 파일
+agent-leak-app-*
+agent-app-leak*
+*.zip
+
+# 실행 중 생기는 파일
+scripts/runs/
+scripts/reports/
+api_keys/
+upload_files/
